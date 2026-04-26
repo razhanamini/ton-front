@@ -9,7 +9,7 @@ export default function BetDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { profile } = useMe()
-  const { showAlert, showConfirm } = useTelegram()
+  const { showAlert } = useTelegram()
   const [bet, setBet] = useState<Bet | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedSide, setSelectedSide] = useState<'yes' | 'no' | null>(null)

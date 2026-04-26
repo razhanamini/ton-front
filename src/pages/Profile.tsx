@@ -6,7 +6,7 @@ import { Page, Card, Input, Btn } from '../components/UI'
 
 export default function Profile() {
   const { profile, refresh } = useMe()
-  const { showAlert, showConfirm } = useTelegram()
+  const { showAlert } = useTelegram()
   const [address, setAddress] = useState(profile?.ton_address || '')
   const [saving, setSaving] = useState(false)
 
