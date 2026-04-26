@@ -1,0 +1,50 @@
+name: Deploy Frontend to VPS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Build Docker image
+        working-directory: ./frontend
+        run: |
+          docker build -t ton-frontend:latest \
+            --build-arg VITE_API_URL=/api \
+            --build-arg VITE_ADMIN_ID=${{ secrets.ADMIN_ID }} \
+            --build-arg VITE_TELEGRAM_MODE=true \
+            .
+      
+      - name: Save and compress image
+        run: |
+          docker save ton-frontend:latest | gzip > ton-frontend.tar.gz
+      
+      - name: Copy image to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "ton-frontend.tar.gz"
+          target: "/root/ton-app/"
+      
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /root/ton-app/
+            docker load < ton-frontend.tar.gz
+            docker-compose down frontend || true
+            docker-compose up -d frontend
+            docker system prune -f

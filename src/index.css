@@ -1,0 +1,59 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #0A0A0C;
+  --bg-card:     #111116;
+  --bg-elevated: #18181F;
+  --bg-input:    #1C1C24;
+
+  --gold:        #D4AF37;
+  --gold-dim:    #A8892A;
+  --gold-glow:   rgba(212, 175, 55, 0.15);
+
+  --teal:        #004F73;
+  --teal-light:  #006A9A;
+  --teal-glow:   rgba(0, 79, 115, 0.25);
+
+  --danger:      #8B0000;
+  --danger-light:#B22222;
+  --loss:        #9B2C2C;
+
+  --win:         #2E8B57;
+  --win-light:   #3DAA6A;
+
+  --text:        #F0EDE4;
+  --text-muted:  #7A7A8A;
+  --text-dim:    #4A4A5A;
+
+  --border:      rgba(212, 175, 55, 0.12);
+  --border-subtle: rgba(255,255,255,0.06);
+
+  --radius:      12px;
+  --radius-lg:   18px;
+  --radius-pill: 999px;
+
+  --font-display: 'Cinzel', serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  --transition:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Utility classes */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
