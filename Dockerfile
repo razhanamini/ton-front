@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY yarn.lock ./
+# Remove yarn.lock line - you're using npm
 
 # Install dependencies
 RUN npm ci
