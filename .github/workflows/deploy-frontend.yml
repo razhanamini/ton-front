@@ -46,3 +46,16 @@ jobs:
             docker-compose down frontend || true
             docker-compose up -d frontend
             docker system prune -f
+
+
+
+
+
+
+
+
+
+
+
+
+
