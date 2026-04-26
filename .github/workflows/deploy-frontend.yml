@@ -3,7 +3,7 @@ name: Deploy Frontend to VPS
 on:
   push:
     branches: [main]
-
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -25,14 +25,14 @@ jobs:
         run: |
           docker save ton-frontend:latest | gzip > ton-frontend.tar.gz
       
-      - name: Copy image to VPS
+      - name: Copy files to VPS
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "ton-frontend.tar.gz"
-          target: "/root/ton-app/"
+          source: "ton-frontend.tar.gz,docker-compose.yml"
+          target: "/root/frontend/"
       
       - name: Deploy on VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -41,21 +41,14 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /root/ton-app/
+            # Create network if not exists
+            docker network create ton-network 2>/dev/null || true
+            
+            cd /root/frontend/
             docker load < ton-frontend.tar.gz
-            docker-compose down frontend || true
-            docker-compose up -d frontend
+            docker-compose down || true
+            docker-compose up -d
             docker system prune -f
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
+            # Cleanup tar file
+            rm ton-frontend.tar.gz
