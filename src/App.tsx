@@ -32,7 +32,7 @@ function App() {
   // Determine active tab based on current path
   const getActiveTab = () => {
     const path = location.pathname
-    if (path === '/') return 'home'
+    if (path === '/home') return 'home'
     if (path === '/mybets') return 'mybets'
     if (path === '/profile') return 'profile'
     if (path === '/admin') return 'admin'
@@ -42,7 +42,7 @@ function App() {
   const handleTabChange = (tab: string) => {
     switch (tab) {
       case 'home':
-        navigate('/')
+        navigate('/home')
         break
       case 'mybets':
         navigate('/mybets')
