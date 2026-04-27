@@ -52,27 +52,26 @@
 
 // export default NavBar
 
+
 // src/components/NavBar.tsx
 import React from 'react'
 
 interface NavBarProps {
   activeTab: string
-  onTabChange: (tab: any) => void
+  onTabChange: (tab: string) => void
   isAdmin: boolean
 }
 
 const NavBar: React.FC<NavBarProps> = ({ activeTab, onTabChange, isAdmin }) => {
   const tabs = [
-    { id: 'home', label: '🏠 Home', path: '/' },
-    { id: 'mybets', label: '🎲 My Bets', path: '/mybets' },
-    { id: 'profile', label: '👤 Profile', path: '/profile' },
-    ...(isAdmin ? [{ id: 'admin', label: '⚙️ Admin', path: '/admin' }] : []),
+    { id: 'home', label: '🏠 Home' },
+    { id: 'mybets', label: '🎲 My Bets' },
+    { id: 'profile', label: '👤 Profile' },
+    ...(isAdmin ? [{ id: 'admin', label: '⚙️ Admin' }] : []),
   ]
 
   return (
     <div style={{
-      position: 'sticky',
-      bottom: 0,
       background: 'rgba(17, 17, 22, 0.95)',
       backdropFilter: 'blur(10px)',
       borderTop: '1px solid var(--border)',
