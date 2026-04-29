@@ -138,7 +138,7 @@ export default function BetDetail() {
             <span>Yes Pool: {bet.yes_pool.toFixed(2)} TON</span>
             <span>No Pool: {bet.no_pool.toFixed(2)} TON</span>
           </div>
-          <div>Odds: Yes {bet.odds.yes.toFixed(2)}x / No {bet.odds.no.toFixed(2)}x</div>
+          <div>Odds: Yes {bet.odds.yes }x / No {bet.odds.no}x</div>
         </div>
 
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>

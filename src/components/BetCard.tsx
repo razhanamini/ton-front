@@ -52,7 +52,7 @@ const BetCard: React.FC<BetCardProps> = ({ bet, onClick }) => {
           borderRadius: 'var(--radius-pill)',
           fontSize: '12px',
         }}>
-          YES: {bet.odds.yes.toFixed(2)}x
+          YES: {bet.odds.yes}x
         </div>
         <div style={{
           background: bet.odds.no > bet.odds.yes ? 'var(--gold-glow)' : 'transparent',
@@ -60,7 +60,7 @@ const BetCard: React.FC<BetCardProps> = ({ bet, onClick }) => {
           borderRadius: 'var(--radius-pill)',
           fontSize: '12px',
         }}>
-          NO: {bet.odds.no.toFixed(2)}x
+          NO: {bet.odds.no}x
         </div>
       </div>
 
